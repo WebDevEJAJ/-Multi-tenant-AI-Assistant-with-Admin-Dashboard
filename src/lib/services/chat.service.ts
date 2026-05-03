@@ -27,12 +27,16 @@ interface ChatRequest {
 interface ChatResponse {
   userMessage: {
     _id: string;
+    conversationId: string;
+    projectId: string;
     role: "user";
     content: string;
     createdAt: Date;
   };
   assistantMessage: {
     _id: string;
+    conversationId: string;
+    projectId: string;
     role: "assistant";
     content: string;
     metadata: {
