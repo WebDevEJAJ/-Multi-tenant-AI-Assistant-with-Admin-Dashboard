@@ -138,12 +138,42 @@ export function useSendMessage() {
 
   return useMutation({
     mutationFn: sendMessage,
-    onSuccess: (data) => {
-      // Invalidate messages for the conversation
+    onMutate: async (newMessage) => {
+      // Cancel any outgoing refetches so they don't overwrite our optimistic update
+      await queryClient.cancelQueries({ queryKey: ["messages", newMessage.conversationId] });
+
+      // Snapshot the previous value
+      const previousMessages = queryClient.getQueryData<Message[]>(["messages", newMessage.conversationId]);
+
+      // Optimistically update to the new value
+      if (previousMessages) {
+        queryClient.setQueryData<Message[]>(["messages", newMessage.conversationId], [
+          ...previousMessages,
+          {
+            _id: Date.now().toString(), // temporary ID
+            conversationId: newMessage.conversationId,
+            projectId: "", // not strictly needed for UI
+            role: "user",
+            content: newMessage.content,
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+      }
+
+      // Return a context object with the snapshotted value
+      return { previousMessages };
+    },
+    onError: (err, newMessage, context) => {
+      // If the mutation fails, use the context returned from onMutate to roll back
+      if (context?.previousMessages) {
+        queryClient.setQueryData(["messages", newMessage.conversationId], context.previousMessages);
+      }
+    },
+    onSettled: (data, error, variables) => {
+      // Always refetch after error or success
       queryClient.invalidateQueries({
-        queryKey: ["messages", data.userMessage.conversationId],
+        queryKey: ["messages", variables.conversationId],
       });
-      // Invalidate conversations list to update lastMessageAt
       queryClient.invalidateQueries({
         queryKey: ["conversations"],
       });

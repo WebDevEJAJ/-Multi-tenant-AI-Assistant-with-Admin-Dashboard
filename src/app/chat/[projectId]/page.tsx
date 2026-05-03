@@ -122,12 +122,22 @@ export default function ChatPage({ params }: ChatPageProps) {
   };
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex overflow-hidden relative">
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`${sidebarOpen ? "w-80" : "w-0"} transition-all duration-300 flex-shrink-0 overflow-hidden border-r flex flex-col`}
+        className={`fixed lg:relative z-50 h-full ${sidebarOpen ? "translate-x-0 w-80" : "-translate-x-full w-80 lg:w-0 lg:translate-x-0"} transition-all duration-300 ease-out flex-shrink-0 overflow-hidden border-r flex flex-col`}
         style={{
-          background: "rgba(var(--color-surface), 0.5)",
+          background: "rgba(var(--color-surface), 0.85)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
           borderColor: "rgba(var(--color-border), 0.3)",
         }}
         data-testid="chat-sidebar"

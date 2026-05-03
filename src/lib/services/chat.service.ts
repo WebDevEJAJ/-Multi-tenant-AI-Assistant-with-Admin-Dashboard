@@ -132,12 +132,16 @@ export async function processChat(request: ChatRequest): Promise<ChatResponse> {
   return {
     userMessage: {
       _id: userMessage._id.toString(),
+      conversationId: userMessage.conversationId.toString(),
+      projectId: userMessage.projectId.toString(),
       role: "user",
       content: userMessage.content,
       createdAt: userMessage.createdAt,
     },
     assistantMessage: {
       _id: assistantMessage._id.toString(),
+      conversationId: assistantMessage.conversationId.toString(),
+      projectId: assistantMessage.projectId.toString(),
       role: "assistant",
       content: assistantMessage.content,
       metadata: {

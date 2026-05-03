@@ -1,6 +1,6 @@
-# -Multi-tenant-AI-Assistant-with-Admin-Dashboard
-A production-grade multi-tenant AI assistant built with Next.js, MongoDB, and Gemini API, featuring a strict layered architecture, server-side authorization, simulated integrations (Shopify + CRM), and a fully config-driven admin dashboard powered by MongoDB.
+# 🤖 Multi-tenant AI Assistant with Admin Dashboard
 
+A production-grade, full-stack AI chat platform built with Next.js, MongoDB, and Google Gemini. Features multi-tenant project isolation, config-driven admin dashboards, simulated integrations (Shopify + CRM), and real AI-powered conversations.
 
 ![Tech Stack](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-green?style=flat-square&logo=mongodb)

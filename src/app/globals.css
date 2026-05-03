@@ -4,17 +4,17 @@
   :root {
     --color-primary: 99 102 241;
     --color-primary-hover: 79 70 229;
-    --color-accent: 139 92 246;
-    --color-bg: 15 15 25;
-    --color-surface: 22 22 35;
-    --color-surface-2: 30 30 48;
-    --color-surface-3: 40 40 60;
-    --color-border: 55 55 80;
-    --color-text: 240 240 255;
-    --color-text-secondary: 160 165 190;
-    --color-text-muted: 100 105 130;
-    --color-success: 34 197 94;
-    --color-warning: 234 179 8;
+    --color-accent: 168 85 247;
+    --color-bg: 9 9 14;
+    --color-surface: 18 18 27;
+    --color-surface-2: 28 28 41;
+    --color-surface-3: 39 39 58;
+    --color-border: 45 45 65;
+    --color-text: 248 250 252;
+    --color-text-secondary: 148 163 184;
+    --color-text-muted: 100 116 139;
+    --color-success: 16 185 129;
+    --color-warning: 245 158 11;
     --color-error: 239 68 68;
   }
 
@@ -34,25 +34,30 @@
 
 @layer components {
   .glass-card {
-    background: rgba(var(--color-surface), 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(var(--color-border), 0.5);
-    border-radius: 16px;
+    background: rgba(var(--color-surface), 0.65);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(var(--color-border), 0.4);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
   }
 
   .glass-card-hover {
-    background: rgba(var(--color-surface), 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(var(--color-border), 0.5);
-    border-radius: 16px;
-    transition: all 0.3s ease;
+    background: rgba(var(--color-surface), 0.65);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(var(--color-border), 0.4);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
   }
 
   .glass-card-hover:hover {
-    background: rgba(var(--color-surface-2), 0.8);
-    border-color: rgba(var(--color-primary), 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(var(--color-primary), 0.1);
+    background: rgba(var(--color-surface-2), 0.75);
+    border-color: rgba(var(--color-primary), 0.5);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 40px -8px rgba(var(--color-primary), 0.15),
+                0 0 20px -5px rgba(var(--color-accent), 0.1);
   }
 
   .gradient-text {
@@ -98,38 +103,45 @@
     );
     color: white;
     padding: 10px 24px;
-    border-radius: 12px;
+    border-radius: 14px;
     font-weight: 600;
     font-size: 14px;
-    transition: all 0.2s ease;
-    border: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 4px 12px rgba(var(--color-primary), 0.2);
   }
 
   .btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(var(--color-primary), 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--color-primary), 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(var(--color-primary), 0.2);
   }
 
   .btn-primary:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    filter: grayscale(0.5);
   }
 
   .btn-ghost {
     background: transparent;
     color: rgb(var(--color-text-secondary));
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: 500;
     font-size: 14px;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
     cursor: pointer;
     display: inline-flex;
@@ -138,9 +150,10 @@
   }
 
   .btn-ghost:hover {
-    background: rgba(var(--color-surface-2), 0.8);
+    background: rgba(var(--color-surface-2), 0.6);
     color: rgb(var(--color-text));
-    border-color: rgba(var(--color-border), 0.5);
+    border-color: rgba(var(--color-border), 0.4);
+    transform: translateY(-1px);
   }
 
   .input-field {
